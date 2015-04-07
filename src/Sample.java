@@ -37,19 +37,19 @@ public class Sample {
 //        	if (rc == 0)
 //        		break;
 //        }
-        // When first 21 bytes set as 0x00, Oracle returned 0.
+        // When first 22 bytes set as 0x00, Oracle returned 0.
         // Therefore, padding is 0x0B, plain text length is 20 bytes.
         
         // start to crack plain text
-        int[] ptext = new int[20];
+        int[] ptext = new int[21];
         
-        // crack the jth byte, j+1 = 16 to 20
-        for (int j=19; j>=15; j--) {
+        // crack the (j+1)th byte, j = 16 to 20
+        for (int j=20; j>=16; j--) {
         	// for the last 32-j bytes in 2nd block of cipher,
         	// C xor 0x0B (correct padding) = C' xor (32-j).
         	int[] ctext_copy = ctext;
         	for (int k=j+1; k<32; k++) {
-        		ctext_copy[k] = (ctext[k] ^ 0x0b) ^ (32-j);
+        		ctext_copy[k] = (ctext[k] ^ (32-21)) ^ (32-j);
         	}
         	// then for the jth byte, test 0x00 to 0xff to see which value decrypts
         	for (int k=0; k<256; k++) {
