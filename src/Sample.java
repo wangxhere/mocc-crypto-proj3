@@ -55,7 +55,7 @@ public class Sample {
         	for (int k=0; k<256; k++) {
         		ctext_copy[j] = k;
         		rc = oracle.send(ctext_copy,3);
-        		System.out.printf("Oracle returned: %d, for %dth bytes set as 0x%02x.\n", rc, j, k);
+        		System.out.printf("Oracle returned: %d, for %dth bytes set as 0x%02x.\n", rc, j+1, k);
         		if (rc == 1) {
         			// c' xor padding = c xor m
         			// m = c' xor padding xor c
